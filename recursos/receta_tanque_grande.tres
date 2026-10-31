@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecetaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/receta_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "tanque_grande"
+nombre = "Tanque grande de O2 (+50 máx)"
+inputs = {
+5: 2
+}
+mejora_o2_max = 50
+coste_bytes = 1000

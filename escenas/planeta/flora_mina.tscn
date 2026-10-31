@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://flora_mina_f8"]
+
+[ext_resource type="Script" path="res://scripts/planeta/flora_mina.gd" id="1_mina"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 0.5
+bottom_radius = 0.7
+height = 0.35
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulbo"]
+radius = 0.6
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.2, 0.15, 0.15, 1)
+roughness = 0.9
+
+[node name="FloraMina" type="Node3D"]
+script = ExtResource("1_mina")
+
+[node name="BaseRoca" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+mesh = SubResource("CylinderMesh_base")
+material_override = SubResource("StandardMaterial3D_base")
+
+[node name="BulboMina" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+mesh = SubResource("SphereMesh_bulbo")
+
+[node name="LuzMina" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+light_color = Color(0.9, 0.2, 0.1, 1)
+light_energy = 0.8
+omni_range = 5.0
+
+[node name="RayCastSuelo" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+target_position = Vector3(0, -1.6, 0)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://escenas/planeta/pickable_item.gd" id="1_item"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_comp"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_comp"]
+top_radius = 0.18
+bottom_radius = 0.18
+height = 0.38
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_comp"]
+albedo_color = Color(0.85, 0.88, 0.92, 1)
+roughness = 0.6
+
+[node name="ItemCompuesto" type="RigidBody3D" groups=["items", "small_items"]]
+script = ExtResource("1_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_comp")
+material = SubResource("StandardMaterial3D_comp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_comp")

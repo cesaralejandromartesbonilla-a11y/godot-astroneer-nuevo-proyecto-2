@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecursoData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/RecursoData.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/item_arcilla.tscn" id="2_item"]
+
+[resource]
+script = ExtResource("1_script")
+id = 22
+nombre = "Arcilla"
+color_albedo = Color(0.76, 0.38, 0.22, 1)
+escena_item = ExtResource("2_item")

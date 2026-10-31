@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://gtwengine_f7"]
+
+[ext_resource type="Script" path="res://scripts/planeta/gateway_engine.gd" id="1_gweng"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 16.0
+bottom_radius = 17.0
+height = 1.5
+radial_segments = 12
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_base"]
+height = 1.5
+radius = 17.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_pilar"]
+size = Vector3(2.5, 18.0, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pilar"]
+size = Vector3(2.5, 18.0, 2.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_altar"]
+top_radius = 3.2
+bottom_radius = 3.6
+height = 1.2
+radial_segments = 8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_altar"]
+height = 1.2
+radius = 3.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_nucleo"]
+size = Vector3(2.2, 2.2, 2.2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interaccion"]
+radius = 6.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_retorno"]
+height = 3.0
+radius = 3.5
+
+[node name="GatewayEngine" type="Node3D"]
+script = ExtResource("1_gweng")
+
+[node name="Plataforma" type="StaticBody3D" parent="."]
+
+[node name="MeshBase" type="MeshInstance3D" parent="Plataforma"]
+mesh = SubResource("CylinderMesh_base")
+
+[node name="CollBase" type="CollisionShape3D" parent="Plataforma"]
+shape = SubResource("CylinderShape3D_base")
+
+[node name="Pilar1" type="StaticBody3D" parent="."]
+transform = Transform3D(0.9659, -0.2588, 0, 0.2588, 0.9659, 0, 0, 0, 1, 13.0, 8.0, 0)
+
+[node name="MeshPilar1" type="MeshInstance3D" parent="Pilar1"]
+mesh = SubResource("PrismMesh_pilar")
+
+[node name="CollPilar1" type="CollisionShape3D" parent="Pilar1"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="Pilar2" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.4829, 0.1294, -0.866, -0.2588, -0.9659, 0, -0.8365, 0.2241, 0.5, -6.5, 8.0, 11.2)
+
+[node name="MeshPilar2" type="MeshInstance3D" parent="Pilar2"]
+mesh = SubResource("PrismMesh_pilar")
+
+[node name="CollPilar2" type="CollisionShape3D" parent="Pilar2"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="Pilar3" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.4829, 0.1294, 0.866, -0.2588, -0.9659, 0, 0.8365, -0.2241, 0.5, -6.5, 8.0, -11.2)
+
+[node name="MeshPilar3" type="MeshInstance3D" parent="Pilar3"]
+mesh = SubResource("PrismMesh_pilar")
+
+[node name="CollPilar3" type="CollisionShape3D" parent="Pilar3"]
+shape = SubResource("BoxShape3D_pilar")
+
+[node name="Altar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+
+[node name="MeshAltar" type="MeshInstance3D" parent="Altar"]
+mesh = SubResource("CylinderMesh_altar")
+
+[node name="CollAltar" type="CollisionShape3D" parent="Altar"]
+shape = SubResource("CylinderShape3D_altar")
+
+[node name="NucleoFlotante" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7071, -0.7071, 0, 0.5, 0.5, -0.7071, 0.5, 0.5, 0.7071, 0, 4.5, 0)
+mesh = SubResource("BoxMesh_nucleo")
+
+[node name="LuzNucleo" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+light_color = Color(0.6, 0.2, 1.0, 1)
+light_energy = 3.5
+omni_range = 28.0
+
+[node name="AreaInteraccion" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+
+[node name="CollInteraccion" type="CollisionShape3D" parent="AreaInteraccion"]
+shape = SubResource("SphereShape3D_interaccion")
+
+[node name="AreaRetorno" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+
+[node name="CollRetorno" type="CollisionShape3D" parent="AreaRetorno"]
+shape = SubResource("CylinderShape3D_retorno")
+
+[node name="LabelInfo" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 0)
+pixel_size = 0.01
+billboard = 1
+text = "NUCLEO PLANETARIO"

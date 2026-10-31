@@ -1,0 +1,12 @@
+# Godot 4+ - caché del editor (se regenera sola)
+.godot/
+
+# Archivos temporales del editor
+*.tmp
+
+# Archivo muerto de la limpieza 2026-08-16 (118 MB; contiene un .glb de ~100 MB
+# que superaría el límite de tamaño por archivo de GitHub)
+_backup_eliminados_2026-08-16/
+
+# Build artifacts
+.sconsign.dblite

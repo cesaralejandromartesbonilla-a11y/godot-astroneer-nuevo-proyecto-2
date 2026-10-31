@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecursoData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/RecursoData.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/ore_copper.tscn" id="2_ore"]
+
+[resource]
+script = ExtResource("1_script")
+id = 2
+nombre = "Cobre"
+color_albedo = Color(0.72, 0.45, 0.2, 1)
+escena_item = ExtResource("2_ore")

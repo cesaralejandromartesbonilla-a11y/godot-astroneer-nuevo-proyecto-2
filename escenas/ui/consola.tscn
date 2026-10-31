@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/sistema/consola.gd" id="1_consola"]
+
+[node name="Consola" type="CanvasLayer"]
+script = ExtResource("1_consola")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -260.0
+offset_right = -620.0
+offset_bottom = -8.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="Registro" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = ""
+
+[node name="Entrada" type="LineEdit" parent="Panel/VBox"]
+layout_mode = 2
+placeholder_text = "Escribe un comando (help)..."

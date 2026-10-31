@@ -1,0 +1,285 @@
+[gd_scene load_steps=27 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/centrifugadora.gd" id="1_cent"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 1.75
+bottom_radius = 1.85
+height = 0.35
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.18, 0.22, 0.28, 1)
+roughness = 0.5
+metallic = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_col"]
+height = 0.45
+radius = 1.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vidrio"]
+top_radius = 0.65
+bottom_radius = 0.65
+height = 0.9
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vidrio"]
+transparency = 1
+albedo_color = Color(0.25, 0.65, 0.85, 0.25)
+roughness = 0.1
+metallic = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rotor"]
+size = Vector3(1.0, 0.6, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rotor"]
+albedo_color = Color(0.85, 0.9, 0.95, 1)
+metallic = 0.8
+roughness = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_tanque_base"]
+size = Vector3(0.55, 0.4, 0.55)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tanque_vidrio"]
+top_radius = 0.22
+bottom_radius = 0.22
+height = 0.85
+radial_segments = 14
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tanque_vidrio"]
+transparency = 1
+albedo_color = Color(0.4, 0.7, 0.9, 0.3)
+roughness = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nivel_suelo"]
+top_radius = 0.19
+bottom_radius = 0.19
+height = 0.85
+radial_segments = 14
+
+[sub_resource type="BoxMesh" id="BoxMesh_consola_pie"]
+size = Vector3(0.7, 0.55, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_panel_bg"]
+size = Vector3(1.05, 0.75, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_panel_bg"]
+albedo_color = Color(0.12, 0.15, 0.19, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_barra"]
+size = Vector3(0.85, 0.04, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barra"]
+albedo_color = Color(0.2, 0.9, 0.65, 1)
+emission_enabled = true
+emission = Color(0.15, 0.9, 0.5, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_nav"]
+size = Vector3(0.18, 0.16, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btn_nav"]
+albedo_color = Color(0.25, 0.35, 0.45, 1)
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_nav"]
+size = Vector3(0.22, 0.2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_iniciar"]
+size = Vector3(0.45, 0.16, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_iniciar"]
+size = Vector3(0.5, 0.2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_cargar"]
+size = Vector3(0.78, 0.16, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btn_cargar"]
+albedo_color = Color(0.65, 0.42, 0.2, 1)
+emission_enabled = true
+emission = Color(0.6, 0.35, 0.15, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_cargar"]
+size = Vector3(0.82, 0.2, 0.1)
+
+[node name="Centrifugadora" type="StaticBody3D" groups=["centrifugadora", "modulos_base"]]
+script = ExtResource("1_cent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 0)
+shape = SubResource("CylinderShape3D_col")
+
+[node name="BaseChasis" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0)
+mesh = SubResource("CylinderMesh_base")
+material = SubResource("StandardMaterial3D_base")
+
+[node name="Camara" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, -0.1)
+
+[node name="Vidrio" type="MeshInstance3D" parent="Camara"]
+mesh = SubResource("CylinderMesh_vidrio")
+material = SubResource("StandardMaterial3D_vidrio")
+
+[node name="Tambor" type="Node3D" parent="Camara"]
+
+[node name="Rotor1" type="MeshInstance3D" parent="Camara/Tambor"]
+mesh = SubResource("BoxMesh_rotor")
+material = SubResource("StandardMaterial3D_rotor")
+
+[node name="Rotor2" type="MeshInstance3D" parent="Camara/Tambor"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_rotor")
+material = SubResource("StandardMaterial3D_rotor")
+
+[node name="LuzCamara" type="OmniLight3D" parent="Camara"]
+light_color = Color(0.25, 0.85, 1, 1)
+light_energy = 0.8
+omni_range = 3.0
+
+[node name="TanqueSuelo" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 0, -0.1)
+
+[node name="PedestalTanque" type="MeshInstance3D" parent="TanqueSuelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("BoxMesh_tanque_base")
+material = SubResource("StandardMaterial3D_base")
+
+[node name="TuboVidrio" type="MeshInstance3D" parent="TanqueSuelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("CylinderMesh_tanque_vidrio")
+material = SubResource("StandardMaterial3D_tanque_vidrio")
+
+[node name="NivelSuelo" type="MeshInstance3D" parent="TanqueSuelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("CylinderMesh_nivel_suelo")
+
+[node name="PedestalConsola" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0.35, 0.25)
+mesh = SubResource("BoxMesh_consola_pie")
+material = SubResource("StandardMaterial3D_base")
+
+[node name="Display" type="Node3D" parent="."]
+transform = Transform3D(0.939693, 0.088521, -0.330366, 0.000000, 0.965926, 0.258819, 0.342020, -0.243210, 0.907673, 1.05, 1.32, 0.18)
+
+[node name="PanelFondo" type="MeshInstance3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+mesh = SubResource("BoxMesh_panel_bg")
+material = SubResource("StandardMaterial3D_panel_bg")
+
+[node name="LabelTitulo" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0.01)
+text = "CENTRIFUGADORA"
+font_size = 18
+modulate = Color(0.3, 0.85, 1, 1)
+
+[node name="LabelReceta" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.01)
+text = "COMPUESTO ×4"
+font_size = 24
+modulate = Color(1, 1, 1, 1)
+
+[node name="LabelCoste" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0, 0.01)
+text = "Coste: 50% Sedimento"
+font_size = 16
+modulate = Color(0.85, 0.75, 0.5, 1)
+
+[node name="LabelSedimento" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.01)
+text = "Sedimento: 0%"
+font_size = 16
+modulate = Color(0.6, 0.9, 0.7, 1)
+
+[node name="LabelEstado" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.01)
+text = "[FALTA SEDIMENTO]"
+font_size = 16
+modulate = Color(1, 0.6, 0.1, 1)
+
+[node name="BarraProgreso" type="MeshInstance3D" parent="Display"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28, 0.01)
+mesh = SubResource("BoxMesh_barra")
+material = SubResource("StandardMaterial3D_barra")
+
+[node name="Panel" type="Node3D" parent="."]
+transform = Transform3D(0.939693, 0.144544, -0.309976, 0.000000, 0.906308, 0.422618, 0.342020, -0.397131, 0.851651, 1.05, 0.78, 0.38)
+
+[node name="BotonAnt" type="Area3D" parent="Panel" groups=["botones_centrifugadora"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonAnt"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonAnt"]
+mesh = SubResource("BoxMesh_btn_nav")
+material = SubResource("StandardMaterial3D_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonAnt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+text = "<"
+font_size = 28
+
+[node name="BotonSig" type="Area3D" parent="Panel" groups=["botones_centrifugadora"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonSig"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonSig"]
+mesh = SubResource("BoxMesh_btn_nav")
+material = SubResource("StandardMaterial3D_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonSig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+text = ">"
+font_size = 28
+
+[node name="BotonCentrifugar" type="Area3D" parent="Panel" groups=["botones_centrifugadora"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonCentrifugar"]
+shape = SubResource("BoxShape3D_btn_iniciar")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonCentrifugar"]
+mesh = SubResource("BoxMesh_btn_iniciar")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonCentrifugar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+text = "[ INICIAR ]"
+font_size = 18
+modulate = Color(1, 1, 1, 1)
+
+[node name="BotonCargarSuelo" type="Area3D" parent="Panel" groups=["botones_centrifugadora"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonCargarSuelo"]
+shape = SubResource("BoxShape3D_btn_cargar")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonCargarSuelo"]
+mesh = SubResource("BoxMesh_btn_cargar")
+material = SubResource("StandardMaterial3D_btn_cargar")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonCargarSuelo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+text = "[ CARGAR SEDIMENTO ]"
+font_size = 16
+modulate = Color(1, 0.95, 0.8, 1)
+
+[node name="Salidas" type="Node3D" parent="."]
+
+[node name="Salida1" parent="Salidas" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.38, 1.05)
+
+[node name="Salida2" parent="Salidas" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.38, 1.25)
+
+[node name="Salida3" parent="Salidas" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.38, 1.25)
+
+[node name="Salida4" parent="Salidas" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.38, 1.05)

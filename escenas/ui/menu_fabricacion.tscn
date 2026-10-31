@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/sistema/menu_fabricacion.gd" id="1_menu"]
+
+[node name="MenuFabricacion" type="CanvasLayer"]
+script = ExtResource("1_menu")
+
+[node name="Panel" type="PanelContainer" parent="."]
+visible = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -160.0
+offset_right = 240.0
+offset_bottom = 160.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="Titulo" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Fabricación (los materiales salen de la mochila)"
+
+[node name="Filas" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Cierre" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "[F] para cerrar"

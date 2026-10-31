@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/fundicion.gd" id="1_fun"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(2.2, 1.0, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_horno"]
+size = Vector3(1.0, 1.2, 1.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(2.2, 1.4, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_barra"]
+size = Vector3(1.4, 0.12, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barra"]
+albedo_color = Color(1, 0.6, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.45, 0.1, 1)
+
+[node name="Fundicion" type="StaticBody3D" groups=["fundicion"]]
+script = ExtResource("1_fun")
+
+[node name="Cuerpo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_body")
+
+[node name="Horno" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+mesh = SubResource("BoxMesh_horno")
+
+[node name="Barra" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0)
+mesh = SubResource("BoxMesh_barra")
+material = SubResource("StandardMaterial3D_barra")
+
+[node name="Entrada" parent="." instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1.15, 0.75)
+
+[node name="Salida" parent="." instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.15, 0.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_body")

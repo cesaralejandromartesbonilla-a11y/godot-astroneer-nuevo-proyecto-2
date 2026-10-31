@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/planeta/death_beacon.gd" id="1_dbeacon"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_area"]
+radius = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mochila"]
+size = Vector3(0.8, 1.0, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mochila"]
+albedo_color = Color(1, 0.45, 0.1, 1)
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_columna"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.4, 0.1, 0.55)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_columna"]
+material = SubResource("StandardMaterial3D_columna")
+top_radius = 0.4
+bottom_radius = 0.7
+height = 80.0
+
+[node name="DeathBeacon" type="Area3D" groups=["death_beacons"]]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_dbeacon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+shape = SubResource("SphereShape3D_area")
+
+[node name="Mochila" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_mochila")
+material = SubResource("StandardMaterial3D_mochila")
+
+[node name="ColumnaLuz" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.0, 0)
+mesh = SubResource("CylinderMesh_columna")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+light_color = Color(1, 0.45, 0.1, 1)
+light_energy = 2.5
+omni_range = 16.0

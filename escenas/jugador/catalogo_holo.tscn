@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/jugador/catalogo_holo.gd" id="1_cat"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pantalla"]
+size = Vector3(0.58, 0.32, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pantalla"]
+transparency = 1
+albedo_color = Color(0.04, 0.12, 0.22, 0.78)
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.08, 0.25, 0.45, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_marco"]
+size = Vector3(0.60, 0.02, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marco"]
+albedo_color = Color(0.2, 0.24, 0.3, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marco_btn"]
+albedo_color = Color(0.28, 0.32, 0.42, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.15, 0.4, 0.7, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_marco_sup"]
+size = Vector3(0.60, 0.04, 0.06)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_nav"]
+size = Vector3(0.06, 0.06, 0.03)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_nav"]
+size = Vector3(0.08, 0.08, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btn_nav"]
+albedo_color = Color(0.25, 0.35, 0.45, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_desb"]
+size = Vector3(0.26, 0.06, 0.03)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_desb"]
+size = Vector3(0.28, 0.08, 0.05)
+
+[node name="CatalogoHolo" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.85, 0.75)
+script = ExtResource("1_cat")
+
+[node name="BotonToggleCatalogo" type="Area3D" parent="." groups=["botones_catalogo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BotonToggleCatalogo"]
+mesh = SubResource("BoxMesh_marco")
+material_override = SubResource("StandardMaterial3D_marco_btn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BotonToggleCatalogo"]
+shape = SubResource("BoxShape3D_marco_sup")
+
+[node name="Label3D" type="Label3D" parent="BotonToggleCatalogo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+pixel_size = 0.0012
+text = "[ CATALOGO ]"
+font_size = 18
+outline_size = 3
+modulate = Color(0.4, 0.9, 1, 1)
+
+[node name="Pantalla" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_pantalla")
+material_override = SubResource("StandardMaterial3D_pantalla")
+
+[node name="MarcoInf" type="MeshInstance3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16, 0)
+mesh = SubResource("BoxMesh_marco")
+material_override = SubResource("StandardMaterial3D_marco")
+
+[node name="Titulo" type="Label3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.02)
+pixel_size = 0.0014
+text = "CATALOGO DE INVESTIGACION"
+font_size = 24
+outline_size = 4
+modulate = Color(0.3, 0.85, 1, 1)
+
+[node name="BytesDisponibles" type="Label3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0.02)
+pixel_size = 0.0014
+text = "BYTES: 0"
+font_size = 22
+outline_size = 4
+modulate = Color(0.95, 0.85, 0.25, 1)
+
+[node name="ItemNombre" type="Label3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.02)
+pixel_size = 0.0018
+text = "Tethers x5"
+font_size = 30
+outline_size = 5
+
+[node name="ItemCoste" type="Label3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0.02)
+pixel_size = 0.0013
+text = "COSTE: 0 BYTES"
+font_size = 22
+outline_size = 3
+
+[node name="ItemEstado" type="Label3D" parent="Pantalla"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.065, 0.02)
+pixel_size = 0.0012
+text = "[DESBLOQUEADO]"
+font_size = 20
+outline_size = 3
+
+[node name="BotonAnt" type="Area3D" parent="Pantalla" groups=["botones_catalogo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.11, 0.02)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pantalla/BotonAnt"]
+mesh = SubResource("BoxMesh_btn_nav")
+material_override = SubResource("StandardMaterial3D_btn_nav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pantalla/BotonAnt"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Pantalla/BotonAnt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+pixel_size = 0.002
+text = "<"
+font_size = 36
+
+[node name="BotonSig" type="Area3D" parent="Pantalla" groups=["botones_catalogo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.11, 0.02)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pantalla/BotonSig"]
+mesh = SubResource("BoxMesh_btn_nav")
+material_override = SubResource("StandardMaterial3D_btn_nav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pantalla/BotonSig"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Pantalla/BotonSig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+pixel_size = 0.002
+text = ">"
+font_size = 36
+
+[node name="BotonDesbloquear" type="Area3D" parent="Pantalla" groups=["botones_catalogo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0.02)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pantalla/BotonDesbloquear"]
+mesh = SubResource("BoxMesh_btn_desb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pantalla/BotonDesbloquear"]
+shape = SubResource("BoxShape3D_btn_desb")
+
+[node name="Label3D" type="Label3D" parent="Pantalla/BotonDesbloquear"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+pixel_size = 0.0016
+text = "[DESBLOQUEAR]"
+font_size = 24
+outline_size = 4
+
+[node name="LuzPantalla" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+light_color = Color(0.2, 0.75, 1, 1)
+light_energy = 0.0
+omni_range = 1.4

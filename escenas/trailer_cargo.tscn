@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cbfuh148vfp1f"]
+
+[ext_resource type="ArrayMesh" uid="uid://bqrwin8ccgptt" path="res://vehicles/meshes/wheel.res" id="1_hf0qo"]
+[ext_resource type="Texture2D" uid="uid://bju75l2w3r7vq" path="res://vehicles/blob_shadow.png" id="2_qvfr1"]
+[ext_resource type="Script" uid="uid://cf30x5lwad8m8" path="res://scripts/maquinas/zona_de_carga.gd" id="3_3xrww"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nnr3x"]
+size = Vector3(1, 0.42700195, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nmww6"]
+size = Vector3(0.10455322, 1.0908203, 4.17865)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pxc21"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ype34"]
+size = Vector3(1, 1, 1.1083984)
+
+[node name="Trailer3" type="VehicleBody3D" unique_id=1830780117 groups=["remolques"]]
+mass = 20.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.5, 0)
+
+[node name="TWheel1" type="VehicleWheel3D" parent="." unique_id=745385437]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0.573678, -0.402732, -1.53277)
+wheel_roll_influence = 0.4
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_stiffness = 28.0
+damping_compression = 0.88
+
+[node name="TWheel1" type="MeshInstance3D" parent="TWheel1" unique_id=1723840337]
+layers = 2
+gi_mode = 2
+mesh = ExtResource("1_hf0qo")
+
+[node name="TWheel2" type="VehicleWheel3D" parent="." unique_id=996696474]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0.573678, -0.402732, -0.600809)
+wheel_roll_influence = 0.4
+wheel_radius = 0.23
+wheel_friction_slip = 1.0
+suspension_stiffness = 28.0
+damping_compression = 0.88
+
+[node name="TWheel2" type="MeshInstance3D" parent="TWheel2" unique_id=291617706]
+layers = 2
+gi_mode = 2
+mesh = ExtResource("1_hf0qo")
+
+[node name="TWheel3" type="VehicleWheel3D" parent="." unique_id=668363930]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, -0.573678, -0.402732, -1.53277)
+wheel_roll_influence = 0.4
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_stiffness = 28.0
+damping_compression = 0.88
+
+[node name="TWheel3" type="MeshInstance3D" parent="TWheel3" unique_id=2041802215]
+layers = 2
+gi_mode = 2
+mesh = ExtResource("1_hf0qo")
+
+[node name="TWheel4" type="VehicleWheel3D" parent="." unique_id=818780971]
+transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, -0.573678, -0.402732, -0.600809)
+wheel_roll_influence = 0.4
+wheel_radius = 0.23
+wheel_friction_slip = 1.0
+suspension_stiffness = 20.0
+damping_compression = 0.88
+
+[node name="TWheel4" type="MeshInstance3D" parent="TWheel4" unique_id=1107515995]
+layers = 2
+gi_mode = 2
+mesh = ExtResource("1_hf0qo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1057210749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22437954, -1.0968246)
+shape = SubResource("BoxShape3D_nnr3x")
+
+[node name="BlobShadow" type="Decal" parent="." unique_id=1145031285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, -0.661, -1.05)
+size = Vector3(1.6, 4, 1.8)
+texture_albedo = ExtResource("2_qvfr1")
+upper_fade = 2.0
+lower_fade = 1.0
+cull_mask = 1048573
+
+[node name="PuntoAcopleRemolque" type="Marker3D" parent="." unique_id=537994739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06683278, 1.8170209)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1833630361]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.0029792786, 0.07320833, 0.08979416)
+shape = SubResource("BoxShape3D_nmww6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=218078443]
+transform = Transform3D(-7.430936e-09, -1.085, 0, 0.17, -4.742686e-08, 0, 0, 0, 4, 0.005306244, -0.060724497, 0)
+mesh = SubResource("BoxMesh_pxc21")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=1382751970]
+transform = Transform3D(-1.1802075e-08, 0, 0.27, 0, 1, 0, -0.27, 0, -1.1802075e-08, -0.0040254593, 0.5057368, 2.019988)
+shape = SubResource("BoxShape3D_nmww6")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1688286753]
+transform = Transform3D(-2.0107238e-09, 0, 1.3, 0, 1.085, 0, -0.046, 0, -5.6824803e-08, 0.047175407, 0.54128313, 2.0050101)
+mesh = SubResource("BoxMesh_pxc21")
+skeleton = NodePath("../CollisionShape3D6")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1847311984]
+script = ExtResource("3_3xrww")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1207880932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4811865, -1.4936523)
+shape = SubResource("BoxShape3D_ype34")
+
+[node name="Marker3D" type="Marker3D" parent="Area3D" unique_id=1135710208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.547024, -1.5156381)
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=1874857361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36356115, 0)
+script = ExtResource("3_3xrww")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=749975518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1332078, -0.10900974)
+shape = SubResource("BoxShape3D_ype34")
+
+[node name="Marker3D" type="Marker3D" parent="Area3D2" unique_id=1754982128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16710329, -0.15320945)

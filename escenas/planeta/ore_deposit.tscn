@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/planeta/ore_deposit.gd" id="1_dep"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_c1"]
+size = Vector3(0.7, 1.8, 0.7)
+
+[sub_resource type="PrismMesh" id="PrismMesh_c2"]
+size = Vector3(0.5, 1.1, 0.5)
+
+[sub_resource type="PrismMesh" id="PrismMesh_c3"]
+size = Vector3(0.45, 0.9, 0.45)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dep"]
+radius = 1.4
+
+[node name="OreDeposit" type="StaticBody3D" groups=["ore_deposits"]]
+script = ExtResource("1_dep")
+
+[node name="Crystal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("PrismMesh_c1")
+
+[node name="Crystal2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866, 0, -0.5, 0.25, 0.866, 0.433, 0.433, -0.5, 0.75, 0.55, 0.3, 0.25)
+mesh = SubResource("PrismMesh_c2")
+
+[node name="Crystal3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0.661, -0.331, 0.866, 0.373, -0.573, -0.5, 0.644, -0.5, 0.25, -0.3)
+mesh = SubResource("PrismMesh_c3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("SphereShape3D_dep")

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://polvo_excav_f6"]
+
+[sub_resource type="ParticleProcessMaterial" id="PartMat_polvo"]
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 1.5
+initial_velocity_max = 4.0
+gravity = Vector3(0, -4, 0)
+scale_min = 0.06
+scale_max = 0.14
+color = Color(0.55, 0.45, 0.32, 0.85)
+color_ramp = null
+
+[sub_resource type="SphereMesh" id="Sphere_polvo"]
+radius = 0.05
+height = 0.1
+
+[node name="PolvoExcavacion" type="GPUParticles3D"]
+emitting = false
+amount = 24
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource("PartMat_polvo")
+draw_passes = 1
+draw_pass_1 = SubResource("Sphere_polvo")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://flora_spitter_f8"]
+
+[ext_resource type="Script" path="res://scripts/planeta/flora_spitter.gd" id="1_spitter"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 0.4
+bottom_radius = 0.75
+height = 1.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulbo"]
+radius = 0.65
+height = 1.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_canon"]
+size = Vector3(0.25, 0.25, 0.6)
+
+[node name="FloraSpitter" type="Node3D"]
+script = ExtResource("1_spitter")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("CylinderMesh_base")
+
+[node name="Cabeza" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="BulboDisparo" type="MeshInstance3D" parent="Cabeza"]
+mesh = SubResource("SphereMesh_bulbo")
+
+[node name="Canon" type="MeshInstance3D" parent="Cabeza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.65)
+mesh = SubResource("BoxMesh_canon")
+
+[node name="Boca" type="Node3D" parent="Cabeza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 1.0)
+
+[node name="LuzAlerta" type="OmniLight3D" parent="Cabeza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+light_color = Color(1, 0.2, 0.1, 1)
+light_energy = 0.8
+omni_range = 6.0
+
+[node name="RayCastSuelo" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, -1.8, 0)

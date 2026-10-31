@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" uid="uid://blqelpgav0fvh" path="res://escenas/planeta/pickable_item.gd" id="1_item"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ore"]
+radius = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_ore"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ore"]
+albedo_color = Color(0.6, 0.85, 0.95, 1)
+emission_enabled = true
+emission = Color(0.3, 0.6, 0.8, 1)
+roughness = 0.25
+
+[node name="OreCriolita" type="RigidBody3D" groups=["items", "small_items"]]
+script = ExtResource("1_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ore")
+material = SubResource("StandardMaterial3D_ore")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ore")

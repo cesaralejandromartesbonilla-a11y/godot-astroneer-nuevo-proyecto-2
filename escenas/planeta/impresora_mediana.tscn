@@ -1,0 +1,253 @@
+[gd_scene load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/impresora_mediana.gd" id="1_med"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(2.2, 0.3, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.2, 0.24, 0.28, 1)
+metallic = 0.5
+roughness = 0.45
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_col"]
+size = Vector3(2.3, 0.8, 1.9)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_plato"]
+top_radius = 0.65
+bottom_radius = 0.7
+height = 0.06
+radial_segments = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plato"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+metallic = 0.7
+roughness = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_pilar"]
+size = Vector3(0.18, 1.6, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pilar"]
+albedo_color = Color(0.85, 0.6, 0.1, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_arco"]
+size = Vector3(1.6, 0.15, 0.18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabezal"]
+size = Vector3(0.5, 0.18, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cabezal"]
+albedo_color = Color(0.9, 0.92, 0.95, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_laser"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.5
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_laser"]
+albedo_color = Color(0.2, 1.0, 0.7, 1)
+emission_enabled = true
+emission = Color(0.1, 0.95, 0.6, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_pantalla_bg"]
+size = Vector3(1.0, 0.65, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pantalla_bg"]
+albedo_color = Color(0.1, 0.12, 0.15, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_barra"]
+size = Vector3(0.8, 0.04, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_barra"]
+albedo_color = Color(0.2, 0.9, 0.6, 1)
+emission_enabled = true
+emission = Color(0.15, 0.85, 0.5, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_nav"]
+size = Vector3(0.16, 0.14, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_nav"]
+size = Vector3(0.18, 0.16, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btn_imprimir"]
+size = Vector3(0.42, 0.14, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btn_imprimir"]
+size = Vector3(0.45, 0.16, 0.08)
+
+[node name="ImpresoraMediana" type="StaticBody3D" groups=["impresoras_base", "modulo_base"]]
+script = ExtResource("1_med")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("BoxMesh_base")
+material_override = SubResource("StandardMaterial3D_base")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_col")
+
+[node name="PilarIzq" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.95, -0.3)
+mesh = SubResource("BoxMesh_pilar")
+material_override = SubResource("StandardMaterial3D_pilar")
+
+[node name="PilarDer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0.95, -0.3)
+mesh = SubResource("BoxMesh_pilar")
+material_override = SubResource("StandardMaterial3D_pilar")
+
+[node name="PuenteArco" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -0.3)
+mesh = SubResource("BoxMesh_arco")
+material_override = SubResource("StandardMaterial3D_pilar")
+
+[node name="CamaImpresion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="PlatoMesh" type="MeshInstance3D" parent="CamaImpresion"]
+mesh = SubResource("CylinderMesh_plato")
+material_override = SubResource("StandardMaterial3D_plato")
+
+[node name="PuntoImpresion" type="Marker3D" parent="CamaImpresion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="GhostPreview" type="MeshInstance3D" parent="CamaImpresion"]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0.4, 0)
+
+[node name="Cabezal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.3)
+
+[node name="CabezalMesh" type="MeshInstance3D" parent="Cabezal"]
+mesh = SubResource("BoxMesh_cabezal")
+material_override = SubResource("StandardMaterial3D_cabezal")
+
+[node name="RayoLaser" type="MeshInstance3D" parent="Cabezal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.25)
+visible = false
+mesh = SubResource("CylinderMesh_laser")
+material_override = SubResource("StandardMaterial3D_laser")
+
+[node name="LuzImpresion" type="OmniLight3D" parent="Cabezal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0.25)
+light_color = Color(0.2, 1, 0.7, 1)
+light_energy = 0.0
+omni_range = 3.5
+
+[node name="Slots" type="Node3D" parent="."]
+
+[node name="SlotEntrada1" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.85, 0.32, 0.55)
+
+[node name="SlotEntrada2" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.0, 0.32, 0.75)
+
+[node name="SlotEntrada3" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.85, 0.32, 0.55)
+
+[node name="Display" type="Node3D" parent="."]
+transform = Transform3D(0.939693, 0.116978, -0.321394, 0, 0.939693, 0.34202, 0.34202, -0.321394, 0.883022, 1.25, 0.95, 0.2)
+
+[node name="MeshFondo" type="MeshInstance3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.015)
+mesh = SubResource("BoxMesh_pantalla_bg")
+material_override = SubResource("StandardMaterial3D_pantalla_bg")
+
+[node name="LabelTitulo" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0.01)
+text = "IMPRESORA MEDIANA"
+font_size = 15
+modulate = Color(0.3, 0.85, 1, 1)
+
+[node name="LabelReceta" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.01)
+text = "Horno / Fundición"
+font_size = 20
+modulate = Color(1, 1, 1, 1)
+
+[node name="LabelCoste" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0.01)
+text = "Compuesto: 0/1, Resina: 0/2"
+font_size = 15
+modulate = Color(0.9, 0.8, 0.4, 1)
+
+[node name="LabelEstado" type="Label3D" parent="Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0.01)
+text = "[FALTAN MATERIALES]"
+font_size = 14
+modulate = Color(0.9, 0.6, 0.2, 1)
+
+[node name="BarraProgreso" type="MeshInstance3D" parent="Display"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24, 0.01)
+mesh = SubResource("BoxMesh_barra")
+material_override = SubResource("StandardMaterial3D_barra")
+
+[node name="Panel" type="Node3D" parent="."]
+transform = Transform3D(0.939693, 0.116978, -0.321394, 0, 0.939693, 0.34202, 0.34202, -0.321394, 0.883022, 1.25, 0.62, 0.32)
+
+[node name="BotonAnt" type="Area3D" parent="Panel" groups=["botones_impresora_base"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonAnt"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonAnt"]
+mesh = SubResource("BoxMesh_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonAnt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
+text = "<"
+font_size = 24
+
+[node name="BotonSig" type="Area3D" parent="Panel" groups=["botones_impresora_base"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonSig"]
+shape = SubResource("BoxShape3D_btn_nav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonSig"]
+mesh = SubResource("BoxMesh_btn_nav")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonSig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
+text = ">"
+font_size = 24
+
+[node name="BotonImprimir" type="Area3D" parent="Panel" groups=["botones_impresora_base"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonImprimir"]
+shape = SubResource("BoxShape3D_btn_imprimir")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonImprimir"]
+mesh = SubResource("BoxMesh_btn_imprimir")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonImprimir"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
+text = "[ IMPRIMIR ]"
+font_size = 15
+
+[node name="BotonCargar" type="Area3D" parent="Panel" groups=["botones_impresora_base"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel/BotonCargar"]
+shape = SubResource("BoxShape3D_btn_imprimir")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/BotonCargar"]
+mesh = SubResource("BoxMesh_btn_imprimir")
+
+[node name="Label3D" type="Label3D" parent="Panel/BotonCargar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
+text = "[ CARGAR MATERIALES ]"
+font_size = 13
+modulate = Color(1, 0.9, 0.7, 1)

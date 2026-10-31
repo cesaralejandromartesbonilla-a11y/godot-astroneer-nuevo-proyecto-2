@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" uid="uid://blqelpgav0fvh" path="res://escenas/planeta/pickable_item.gd" id="1_ckheu"]
+[ext_resource type="Script" uid="uid://cg5o1n0gcvrar" path="res://scripts/jugador/pickable_item.gd" id="1_n2oe7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_phys"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_copper"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_copper"]
+albedo_color = Color(0.72, 0.45, 0.2, 1)
+roughness = 0.4
+metallic = 0.7
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["items", "small_items", "ores"]]
+script = ExtResource("1_ckheu")
+
+[node name="PickableItem" type="Area3D" parent="."]
+collision_layer = 0
+input_ray_pickable = false
+script = ExtResource("1_n2oe7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickableItem"]
+shape = SubResource("BoxShape3D_phys")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_copper")
+material = SubResource("StandardMaterial3D_copper")
+skeleton = NodePath("../PickableItem")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_phys")

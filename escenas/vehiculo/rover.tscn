@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://dgd37asxm0eay"]
+
+[ext_resource type="Script" uid="uid://dsufrih6gwns3" path="res://scripts/vehiculo/rover.gd" id="1_rover"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chasis"]
+size = Vector3(1.6, 0.6, 2.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chasis"]
+size = Vector3(1.6, 0.5, 2.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabina"]
+size = Vector3(1.2, 0.5, 0.8)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rueda"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.32
+
+[node name="Rover" type="VehicleBody3D" unique_id=523987451 groups=["vehiculos"]]
+mass = 150.0
+script = ExtResource("1_rover")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2040651999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_chasis")
+
+[node name="Chasis" type="MeshInstance3D" parent="." unique_id=154469373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("BoxMesh_chasis")
+
+[node name="Cabina" type="MeshInstance3D" parent="." unique_id=604765602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -0.6)
+mesh = SubResource("BoxMesh_cabina")
+
+[node name="RuedaDelanteIzq" type="VehicleWheel3D" parent="." unique_id=77434211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.2, -0.85)
+use_as_steering = true
+use_as_traction = true
+wheel_radius = 0.4
+wheel_rest_length = 0.4
+suspension_travel = 0.3
+suspension_stiffness = 55.0
+wheel_friction_slip = 13.0
+suspension_max_force = 7000.0
+damping_compression = 20.0
+damping_relaxation = 20.0
+
+[node name="RuedaDelanteIzq/Rueda" type="MeshInstance3D" parent="RuedaDelanteIzq" unique_id=781082939]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rueda")
+
+[node name="RuedaDelanteDer" type="VehicleWheel3D" parent="." unique_id=1542988761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0.2, -0.85)
+use_as_steering = true
+use_as_traction = true
+wheel_radius = 0.4
+wheel_rest_length = 0.4
+suspension_travel = 0.3
+suspension_stiffness = 55.0
+wheel_friction_slip = 13.0
+suspension_max_force = 7000.0
+damping_compression = 20.0
+damping_relaxation = 20.0
+
+[node name="RuedaDelanteDer/Rueda" type="MeshInstance3D" parent="RuedaDelanteDer" unique_id=1539889760]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rueda")
+
+[node name="RuedaAtrasIzq" type="VehicleWheel3D" parent="." unique_id=990173494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.2, 0.85)
+use_as_traction = true
+wheel_radius = 0.4
+wheel_rest_length = 0.4
+suspension_travel = 0.3
+suspension_stiffness = 55.0
+wheel_friction_slip = 13.0
+suspension_max_force = 7000.0
+damping_compression = 20.0
+damping_relaxation = 20.0
+
+[node name="RuedaAtrasIzq/Rueda" type="MeshInstance3D" parent="RuedaAtrasIzq" unique_id=446094006]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rueda")
+
+[node name="RuedaAtrasDer" type="VehicleWheel3D" parent="." unique_id=2095780936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0.2, 0.85)
+use_as_traction = true
+wheel_radius = 0.4
+wheel_rest_length = 0.4
+suspension_travel = 0.3
+suspension_stiffness = 55.0
+wheel_friction_slip = 13.0
+suspension_max_force = 7000.0
+damping_compression = 20.0
+damping_relaxation = 20.0
+
+[node name="RuedaAtrasDer/Rueda" type="MeshInstance3D" parent="RuedaAtrasDer" unique_id=2005178446]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rueda")
+
+[node name="Camara" type="SpringArm3D" parent="." unique_id=1165028165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+spring_length = 7.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Camara" unique_id=1416380995]
+
+[node name="Slot1" parent="." unique_id=1592081559 instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.85, 0.55)
+
+[node name="Slot2" parent="." unique_id=640591036 instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.85, 0.55)
+
+[node name="Slot3" parent="." unique_id=1788930292 instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.85, 1)
+
+[node name="Slot4" parent="." unique_id=300279343 instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.85, 1)

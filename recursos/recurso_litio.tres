@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecursoData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/items/RecursoData.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/ore_lithium.tscn" id="2_ore"]
+
+[resource]
+script = ExtResource("1_script")
+id = 4
+nombre = "Litio"
+color_albedo = Color(0.75, 0.88, 0.95, 1)
+escena_item = ExtResource("2_ore")

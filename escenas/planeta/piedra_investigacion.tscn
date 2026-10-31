@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/planeta/piedra_investigacion.gd" id="1_piedra"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_piedra"]
+radius = 0.55
+
+[sub_resource type="PrismMesh" id="PrismMesh_piedra"]
+size = Vector3(1.1, 1.2, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_piedra"]
+albedo_color = Color(0.7, 0.3, 1, 1)
+emission_enabled = true
+emission = Color(0.55, 0.2, 1, 1)
+emission_energy_multiplier = 2.0
+
+[node name="PiedraInvestigacion" type="RigidBody3D" groups=["items", "piedras"]]
+script = ExtResource("1_piedra")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_piedra")
+material = SubResource("StandardMaterial3D_piedra")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.7, 0.4, 1, 1)
+light_energy = 1.2
+omni_range = 6.0
+shadow = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_piedra")

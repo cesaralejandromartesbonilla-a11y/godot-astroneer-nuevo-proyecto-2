@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://flora_gas_f8"]
+
+[ext_resource type="Script" path="res://scripts/planeta/flora_gas.gd" id="1_gas"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tallo"]
+top_radius = 0.35
+bottom_radius = 0.7
+height = 1.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulbo"]
+radius = 0.9
+height = 1.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_niebla"]
+radius = 6.2
+height = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_area"]
+radius = 6.5
+
+[node name="FloraGas" type="Node3D"]
+script = ExtResource("1_gas")
+
+[node name="Tallo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("CylinderMesh_tallo")
+
+[node name="BulboGas" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+mesh = SubResource("SphereMesh_bulbo")
+
+[node name="NieblaGas" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("SphereMesh_niebla")
+
+[node name="LuzGas" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+light_color = Color(0.75, 0.9, 0.1, 1)
+light_energy = 0.8
+omni_range = 8.5
+
+[node name="AreaGas" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaGas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_area")
+
+[node name="RayCastSuelo" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, -1.8, 0)

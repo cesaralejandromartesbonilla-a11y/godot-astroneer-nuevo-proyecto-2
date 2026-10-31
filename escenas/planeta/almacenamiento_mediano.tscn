@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/almacenamiento_mediano.gd" id="1_alm"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bastidor"]
+size = Vector3(0.9, 0.6, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bastidor"]
+albedo_color = Color(0.82, 0.85, 0.88, 1)
+metallic = 0.5
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_conector"]
+size = Vector3(0.2, 0.18, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_conector"]
+albedo_color = Color(0.9, 0.55, 0.1, 1)
+emission_enabled = true
+emission = Color(0.85, 0.45, 0.05, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_col"]
+size = Vector3(0.95, 0.7, 0.45)
+
+[node name="AlmacenamientoMediano" type="RigidBody3D" groups=["almacenamiento", "items", "small_items"]]
+script = ExtResource("1_alm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0)
+mesh = SubResource("BoxMesh_bastidor")
+material_override = SubResource("StandardMaterial3D_bastidor")
+
+[node name="PinConector" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("BoxMesh_conector")
+material_override = SubResource("StandardMaterial3D_conector")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+shape = SubResource("BoxShape3D_col")
+
+[node name="SlotsCaraA" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.32, 0.16)
+
+[node name="Slot1" parent="SlotsCaraA" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.32, 0.15, 0)
+
+[node name="Slot2" parent="SlotsCaraA" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.11, 0.15, 0)
+
+[node name="Slot3" parent="SlotsCaraA" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.11, 0.15, 0)
+
+[node name="Slot4" parent="SlotsCaraA" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.32, 0.15, 0)
+
+[node name="SlotsCaraB" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.939693, -0.34202, 8.74228e-08, -0.34202, -0.939693, 0, 0.32, -0.16)
+
+[node name="Slot5" parent="SlotsCaraB" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.32, 0.15, 0)
+
+[node name="Slot6" parent="SlotsCaraB" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.11, 0.15, 0)
+
+[node name="Slot7" parent="SlotsCaraB" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.11, 0.15, 0)
+
+[node name="Slot8" parent="SlotsCaraB" instance=ExtResource("2_slot")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.32, 0.15, 0)

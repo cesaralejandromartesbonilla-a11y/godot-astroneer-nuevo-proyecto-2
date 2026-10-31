@@ -1,0 +1,38 @@
+Aquí tienes la descripción técnica de cómo engañan al jugador y cómo puedes replicar sus sistemas principales para tu MVP:
+
+1. El "Fluido" es solo un Número (Transferencia de Datos)
+En lugar de calcular densidades y colisiones de partículas de líquidos, 
+estos juegos usan transferencia de variables puras.El truco: Un balde, 
+una herramienta o el estómago de un NPC es simplemente un nodo con las variables 
+volumen_actual y capacidad_maxima.El MVP: Al "verter" líquido, 
+instancias un sistema de partículas (GPU Particles) que es puramente cosmético. 
+Simultáneamente, un RayCast invisible detecta si estás apuntando a un contenedor válido. 
+Si es así, el script resta valor de tu herramienta y lo suma al destino. No hay físicas de fluidos reales, 
+solo operaciones de suma y resta ejecutadas en un 
+
+ciclo.2. Expansión y Deformación (Blend Shapes)
+Ninguno de los dos juegos calcula la tensión de la malla de los personajes en tiempo real. 
+La expansión visual (inflado o crecimiento de estómagos) es un truco estático de modelado.
+El truco: Los modelos 3D tienen Blend Shapes (o Shape Keys) pre-modelados en el software de animación. 
+Tienen la forma base (valor 0.0) y la forma máxima deformada/llena (valor 1.0).El MVP: Mediante código, 
+vinculas la variable volumen_actual (del paso anterior) al peso del Blend Shape usando una interpolación lineal (lerp). 
+A medida que el contenedor lógico recibe datos, la malla simplemente transiciona hacia su forma expandida.
+
+3. Interacción Táctil (Physics Grabber)
+El núcleo de la diversión de su sandbox es agarrar, arrastrar y lanzar entidades de forma caótica, 
+pero sin programar complejas animaciones de cinemática inversa (IK) para las manos.
+El truco: Se basan en el patrón clásico de la Gravity Gun.El MVP: Utiliza una articulación de resorte física (como un SpringJoint3D). 
+Al hacer clic en un objeto, el juego crea un enlace invisible entre tu cámara y el centro de masa del objetivo. 
+Esto permite arrastrar personajes para que choquen y rueden por el entorno conservando su inercia y peso natural.
+
+4. IA Reactiva y Estado "Muñeco de Trapo" (Ragdoll)
+Los personajes en estos juegos no necesitan ser inteligentes, solo necesitan ser reactivos al entorno y tolerar el abuso del jugador.  
+El truco: Una Máquina de Estados Finitos (FSM) extremadamente básica entrelazada de forma agresiva con el motor de físicas.El MVP: 
+El NPC solo necesita tres estados: Vagar (moverse por una malla de navegación), Interaccionar (si hay un recurso en su radio de detección), 
+y Manipulado. El secreto cómico es que, en el instante en que el jugador agarra a un NPC con el resorte físico, 
+el script desactiva la IA por completo y activa el modo ragdoll (muñeco de trapo). Cuando lo sueltas y su velocidad se estabiliza, 
+el ragdoll se apaga, se reproduce una animación de "levantarse" y la IA vuelve al estado Vagar.
+
+La regla de oro para este estilo de MVP: 
+Separa siempre la lógica de la representación visual. Los "fluidos" y "volúmenes" ocurren en el código con simples variables; los shaders, 
+las partículas y los Blend Shapes solo leen esos números en tiempo real para crear la ilusión óptica.

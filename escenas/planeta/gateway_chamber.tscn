@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://gtwchamb_f7"]
+
+[ext_resource type="Script" path="res://scripts/planeta/gateway_chamber.gd" id="1_gwch"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 14.0
+bottom_radius = 15.0
+height = 2.0
+radial_segments = 8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_base"]
+height = 2.0
+radius = 15.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_columna"]
+size = Vector3(3.5, 26.0, 3.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_columna"]
+size = Vector3(3.5, 26.0, 3.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pedestal"]
+top_radius = 4.5
+bottom_radius = 5.0
+height = 1.2
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_barra"]
+size = Vector3(0.5, 1.0, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rayo"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 300.0
+radial_segments = 24
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_teleport"]
+height = 4.0
+radius = 4.5
+
+[node name="GatewayChamber" type="Node3D"]
+script = ExtResource("1_gwch")
+
+[node name="Base" type="StaticBody3D" parent="."]
+
+[node name="MeshBase" type="MeshInstance3D" parent="Base"]
+mesh = SubResource("CylinderMesh_base")
+
+[node name="CollBase" type="CollisionShape3D" parent="Base"]
+shape = SubResource("CylinderShape3D_base")
+
+[node name="Columna1" type="StaticBody3D" parent="."]
+transform = Transform3D(0.9659, -0.2588, 0, 0.2588, 0.9659, 0, 0, 0, 1, 11.0, 11.5, 0)
+
+[node name="MeshColumna1" type="MeshInstance3D" parent="Columna1"]
+mesh = SubResource("PrismMesh_columna")
+
+[node name="CollColumna1" type="CollisionShape3D" parent="Columna1"]
+shape = SubResource("BoxShape3D_columna")
+
+[node name="Columna2" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.4829, 0.1294, -0.866, -0.2588, -0.9659, 0, -0.8365, 0.2241, 0.5, -5.5, 11.5, 9.5)
+
+[node name="MeshColumna2" type="MeshInstance3D" parent="Columna2"]
+mesh = SubResource("PrismMesh_columna")
+
+[node name="CollColumna2" type="CollisionShape3D" parent="Columna2"]
+shape = SubResource("BoxShape3D_columna")
+
+[node name="Columna3" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.4829, 0.1294, 0.866, -0.2588, -0.9659, 0, 0.8365, -0.2241, 0.5, -5.5, 11.5, -9.5)
+
+[node name="MeshColumna3" type="MeshInstance3D" parent="Columna3"]
+mesh = SubResource("PrismMesh_columna")
+
+[node name="CollColumna3" type="CollisionShape3D" parent="Columna3"]
+shape = SubResource("BoxShape3D_columna")
+
+[node name="Pedestal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="MeshPedestal" type="MeshInstance3D" parent="Pedestal"]
+mesh = SubResource("CylinderMesh_pedestal")
+
+[node name="BarraEnergia" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_barra")
+
+[node name="RayoVertical" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150.0, 0)
+mesh = SubResource("CylinderMesh_rayo")
+
+[node name="LuzRayo" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.0, 0)
+light_color = Color(0.2, 0.85, 1, 1)
+light_energy = 3.5
+omni_range = 35.0
+
+[node name="AreaTeleport" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="CollTeleport" type="CollisionShape3D" parent="AreaTeleport"]
+shape = SubResource("CylinderShape3D_teleport")
+
+[node name="LabelEstado" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.0, 0)
+pixel_size = 0.012
+billboard = 1
+text = "CAMARA DE PORTAL"

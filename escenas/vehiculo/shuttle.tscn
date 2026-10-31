@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/vehiculo/shuttle.gd" id="1_shuttle"]
+[ext_resource type="PackedScene" path="res://escenas/ui/hud_nave.tscn" id="2_hud"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cuerpo"]
+size = Vector3(4.8, 1.8, 3.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cabina"]
+size = Vector3(2.0, 1.6, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_casco"]
+albedo_color = Color(0.8, 0.8, 0.85, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_ala"]
+size = Vector3(5.0, 0.15, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_motor"]
+size = Vector3(0.5, 0.5, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuego"]
+transparency = 1
+albedo_color = Color(0.2, 0.85, 1, 0.85)
+emission_enabled = true
+emission = Color(0.15, 0.8, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fuego"]
+material = SubResource("StandardMaterial3D_fuego")
+top_radius = 0.05
+bottom_radius = 0.22
+height = 1.2
+
+[node name="Shuttle" type="CharacterBody3D"]
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("1_shuttle")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+shape = SubResource("BoxShape3D_cuerpo")
+
+[node name="Cabina" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("BoxMesh_cabina")
+material = SubResource("StandardMaterial3D_casco")
+
+[node name="Ala" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0.3)
+mesh = SubResource("BoxMesh_ala")
+material = SubResource("StandardMaterial3D_casco")
+
+[node name="MotorIzq" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 1.0, 0.3)
+mesh = SubResource("BoxMesh_motor")
+
+[node name="FuegoIzq" type="MeshInstance3D" parent="MotorIzq"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.0)
+mesh = SubResource("CylinderMesh_fuego")
+
+[node name="MotorDer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.0, 0.3)
+mesh = SubResource("BoxMesh_motor")
+
+[node name="FuegoDer" type="MeshInstance3D" parent="MotorDer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.0)
+mesh = SubResource("CylinderMesh_fuego")
+
+[node name="Camara" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+spring_length = 10.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Camara"]
+fov = 75.0
+far = 20000.0
+
+[node name="HUDNave" parent="." instance=ExtResource("2_hud")]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/panel_solar.gd" id="1_panel"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_poste"]
+size = Vector3(0.12, 1.0, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_placa"]
+size = Vector3(1.6, 0.08, 1.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_panel"]
+size = Vector3(1.6, 1.6, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_placa"]
+albedo_color = Color(0.15, 0.2, 0.45, 1)
+metallic = 0.8
+roughness = 0.2
+
+[node name="PanelSolar" type="StaticBody3D"]
+script = ExtResource("1_panel")
+
+[node name="Poste" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_poste")
+
+[node name="Placa" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.878, 0.479, 0, -0.479, 0.878, 0, 1.25, 0)
+mesh = SubResource("BoxMesh_placa")
+material = SubResource("StandardMaterial3D_placa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("BoxShape3D_panel")

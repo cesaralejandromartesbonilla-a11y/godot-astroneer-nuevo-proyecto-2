@@ -1,0 +1,165 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/sistema/menu_partida.gd" id="1_menu"]
+
+[node name="MenuPartida" type="CanvasLayer"]
+script = ExtResource("1_menu")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -180.0
+offset_right = 280.0
+offset_bottom = 180.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Titulo" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Partida — 3 slots (guardar sobrescribe)"
+horizontal_alignment = 1
+
+[node name="Slots" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Estado" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="HBoxAcciones" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BtnOpciones" type="Button" parent="Panel/VBox/HBoxAcciones"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Opciones"
+
+[node name="BtnMenuPrincipal" type="Button" parent="Panel/VBox/HBoxAcciones"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Menú Principal"
+
+[node name="Cierre" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "[Esc] para cerrar / volver al juego"
+horizontal_alignment = 1
+
+[node name="PanelOpciones" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -190.0
+offset_right = 220.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="VBoxOpciones" type="VBoxContainer" parent="PanelOpciones"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TituloOpciones" type="Label" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+text = "CONFIGURACIÓN"
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="HSep1" type="HSeparator" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="HBoxPantalla" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="LabelPantalla" type="Label" parent="PanelOpciones/VBoxOpciones/HBoxPantalla"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pantalla:"
+
+[node name="OptPantalla" type="OptionButton" parent="PanelOpciones/VBoxOpciones/HBoxPantalla"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxResolucion" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="LabelRes" type="Label" parent="PanelOpciones/VBoxOpciones/HBoxResolucion"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resolución:"
+
+[node name="OptRes" type="OptionButton" parent="PanelOpciones/VBoxOpciones/HBoxResolucion"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxLOD" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="LabelLOD" type="Label" parent="PanelOpciones/VBoxOpciones/HBoxLOD"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Calidad Terreno (LOD):"
+
+[node name="OptLOD" type="OptionButton" parent="PanelOpciones/VBoxOpciones/HBoxLOD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxVSync" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="LabelVSync" type="Label" parent="PanelOpciones/VBoxOpciones/HBoxVSync"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "V-Sync:"
+
+[node name="ChkVsync" type="CheckBox" parent="PanelOpciones/VBoxOpciones/HBoxVSync"]
+layout_mode = 2
+
+[node name="HBoxVolumen" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="LabelVol" type="Label" parent="PanelOpciones/VBoxOpciones/HBoxVolumen"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Volumen Master:"
+
+[node name="SliderVol" type="HSlider" parent="PanelOpciones/VBoxOpciones/HBoxVolumen"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+value = 80.0
+
+[node name="HSep2" type="HSeparator" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+
+[node name="HBoxBotones" type="HBoxContainer" parent="PanelOpciones/VBoxOpciones"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnGuardarOpciones" type="Button" parent="PanelOpciones/VBoxOpciones/HBoxBotones"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Guardar y Aplicar"
+
+[node name="BtnVolverOpciones" type="Button" parent="PanelOpciones/VBoxOpciones/HBoxBotones"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Volver"
+
+[node name="TimerAutosave" type="Timer" parent="."]
+wait_time = 300.0
+autostart = true

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/base/plataforma_mediana.gd" id="1_plat"]
+[ext_resource type="PackedScene" uid="uid://b7j4udydxs8l4" path="res://escenas/planeta/slot.tscn" id="2_slot"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(2.2, 0.28, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.2, 0.24, 0.3, 1)
+metallic = 0.4
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_borde"]
+size = Vector3(2.24, 0.06, 1.44)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_borde"]
+albedo_color = Color(1, 0.7, 0.1, 1)
+emission_enabled = true
+emission = Color(0.9, 0.6, 0.05, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_col"]
+size = Vector3(2.3, 0.35, 1.5)
+
+[node name="PlataformaMediana" type="StaticBody3D" groups=["modulo_base", "plataformas"]]
+script = ExtResource("1_plat")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0)
+mesh = SubResource("BoxMesh_base")
+material_override = SubResource("StandardMaterial3D_base")
+
+[node name="BordeLuz" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("BoxMesh_borde")
+material_override = SubResource("StandardMaterial3D_borde")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, 0)
+shape = SubResource("BoxShape3D_col")
+
+[node name="Slots" type="Node3D" parent="."]
+
+[node name="Slot1" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.3, -0.35)
+
+[node name="Slot2" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.3, -0.35)
+
+[node name="Slot3" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.3, 0.35)
+
+[node name="Slot4" parent="Slots" instance=ExtResource("2_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.3, 0.35)

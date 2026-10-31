@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://cwt57vh6os51l"]
+
+[ext_resource type="Script" uid="uid://cwabp0f82kg45" path="res://scripts/planeta/voxel_manager.gd" id="2_53xjt"]
+[ext_resource type="Script" uid="uid://dd4akgeplc7ja" path="res://scripts/items/RecursoData.gd" id="2_tycn0"]
+[ext_resource type="PackedScene" uid="uid://ccnee5xhisn5e" path="res://escenas/planeta/player.tscn" id="3_53xjt"]
+[ext_resource type="PackedScene" uid="uid://cd3vhb5pq7esj" path="res://escenas/planeta/pickable_item.tscn" id="4_q4kh0"]
+[ext_resource type="PackedScene" uid="uid://banxjmueceguk" path="res://escenas/planeta/pickable_itemheavy.tscn" id="5_dqpiw"]
+[ext_resource type="PackedScene" uid="uid://cjmgc878dhyo" path="res://escenas/planeta/pickable_itemsmall.tscn" id="6_vwuly"]
+[ext_resource type="Resource" path="res://recursos/recurso_cobre.tres" id="7_cobre"]
+[ext_resource type="Resource" path="res://recursos/recurso_hierro.tres" id="8_hierro"]
+[ext_resource type="Resource" path="res://recursos/recurso_litio.tres" id="9_litio"]
+[ext_resource type="PackedScene" path="res://escenas/hud.tscn" id="11_hud"]
+[ext_resource type="Script" uid="uid://lab6jn0mkxso" path="res://scripts/sistema/oxygen_network.gd" id="12_o2net"]
+[ext_resource type="Script" uid="uid://cacphgtsn7b5g" path="res://scripts/sistema/day_night.gd" id="13_dnt"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/capsula.tscn" id="14_cap"]
+[ext_resource type="Script" uid="uid://dnby5oy28tsmq" path="res://scripts/sistema/base_core.gd" id="15_bcore"]
+[ext_resource type="Script" uid="uid://cdnkyn4ghlbm0" path="res://scripts/sistema/catalogo.gd" id="16_cat"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/fundicion.tscn" id="17_fun"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/camara_investigacion.tscn" id="18_cam"]
+[ext_resource type="PackedScene" path="res://escenas/ui/menu_fabricacion.tscn" id="19_menu"]
+[ext_resource type="Script" uid="uid://xnvgvyccycda" path="res://scripts/items/receta_data.gd" id="19_rdata"]
+[ext_resource type="Resource" path="res://recursos/receta_tethers.tres" id="20_rteth"]
+[ext_resource type="Resource" path="res://recursos/receta_panel_solar.tres" id="21_rpan"]
+[ext_resource type="Resource" path="res://recursos/receta_tanque_o2.tres" id="22_rtan"]
+[ext_resource type="Resource" path="res://recursos/receta_bateria.tres" id="23_rbat"]
+[ext_resource type="Resource" path="res://recursos/receta_rover.tres" id="24_rrove"]
+[ext_resource type="PackedScene" path="res://escenas/ui/consola.tscn" id="25_cons"]
+[ext_resource type="PackedScene" path="res://escenas/ui/menu_partida.tscn" id="26_mpart"]
+[ext_resource type="Script" uid="uid://bf2ksg8tuy1wg" path="res://scripts/sistema/game_state.gd" id="27_gstate"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/planeta_cuerpo.tscn" id="30_pcuerpo"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://d1rar1bgoiqk5" path="res://escenas/planeta/planeta_01.tres" id="31_terra"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://g3m5jsdl67si" path="res://escenas/planeta/planeta_arido.tres" id="32_arido"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://ud1bj46onof0" path="res://escenas/planeta/planeta_hielo.tres" id="33_hielo"]
+[ext_resource type="Resource" path="res://recursos/recurso_titanio.tres" id="34_rtit"]
+[ext_resource type="Resource" path="res://recursos/recurso_criolita.tres" id="35_rcrio"]
+[ext_resource type="Resource" path="res://recursos/receta_tanque_grande.tres" id="36_rtanq"]
+[ext_resource type="Resource" path="res://recursos/receta_traje.tres" id="37_rtraje"]
+[ext_resource type="PackedScene" path="res://escenas/vehiculo/shuttle.tscn" id="38_oqy1f"]
+[ext_resource type="Resource" path="res://recursos/receta_lanzadera.tres" id="38_rlanz"]
+[ext_resource type="PackedScene" path="res://escenas/ui/menu_viaje.tscn" id="39_mviaje"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/centrifugadora.tscn" id="40_cent"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/impresora_pequena.tscn" id="41_imppeq"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/impresora_mediana.tscn" id="42_impmed"]
+[ext_resource type="PackedScene" path="res://escenas/planeta/impresora_grande.tscn" id="43_impgra"]
+[ext_resource type="Shader" uid="uid://bfeedqalqx7cs" path="res://shaders/cielo_espacial.gdshader" id="44_cielo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cielo"]
+shader = ExtResource("44_cielo")
+shader_parameter/color_cenit = Color(0.2, 0.52, 0.95, 1)
+shader_parameter/color_horizonte = Color(0.55, 0.82, 0.98, 1)
+shader_parameter/color_espacio = Color(0.008, 0.01, 0.022, 1)
+shader_parameter/fuerza_atmosfera = 1.0
+shader_parameter/planet_up = Vector3(0, 1, 0)
+shader_parameter/sun_dir = Vector3(0, 0.7, 0.7)
+shader_parameter/sun_color = Color(1, 0.95, 0.85, 1)
+shader_parameter/sol_intensidad = 1.2
+
+[sub_resource type="Sky" id="Sky_53xjt"]
+sky_material = SubResource("ShaderMaterial_cielo")
+
+[sub_resource type="Environment" id="Environment_ewkth"]
+background_mode = 2
+sky = SubResource("Sky_53xjt")
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.65, 0.85, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node" type="Node" unique_id=1429156761]
+
+[node name="HUD" parent="." unique_id=1256737293 instance=ExtResource("11_hud")]
+
+[node name="MenuViaje" parent="." unique_id=2113526790 instance=ExtResource("39_mviaje")]
+
+[node name="Consola" parent="." unique_id=285732419 instance=ExtResource("25_cons")]
+
+[node name="MenuPartida" parent="." unique_id=1617963973 instance=ExtResource("26_mpart")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1743096430 groups=["world_environment"]]
+environment = SubResource("Environment_ewkth")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1582023332]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="OxygenNetwork" type="Node" parent="." unique_id=1955477308 groups=["oxygen_network"]]
+script = ExtResource("12_o2net")
+
+[node name="DayNight" type="Node" parent="." unique_id=55055920 node_paths=PackedStringArray("sun") groups=["day_night"]]
+script = ExtResource("13_dnt")
+sun = NodePath("../DirectionalLight3D")
+
+[node name="VoxelManager" type="Node3D" parent="." unique_id=1747485498 node_paths=PackedStringArray("player_node")]
+script = ExtResource("2_53xjt")
+player_node = NodePath("../Player")
+
+[node name="Terra" parent="." unique_id=1241813923 instance=ExtResource("30_pcuerpo")]
+nombre = "Terra"
+generador = ExtResource("31_terra")
+ore_catalog = Array[ExtResource("2_tycn0")]([ExtResource("7_cobre"), ExtResource("8_hierro"), ExtResource("9_litio")])
+col_halo = Color(0.3, 0.75, 1, 1)
+
+[node name="Arido" parent="." unique_id=1967485134 instance=ExtResource("30_pcuerpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
+planeta_id = 1
+nombre = "Arido"
+generador = ExtResource("32_arido")
+ore_catalog = Array[ExtResource("2_tycn0")]([ExtResource("34_rtit"), ExtResource("8_hierro")])
+ore_config = {
+3: {
+"band": Vector2(-200, -60),
+"wl": 110.0
+},
+5: {
+"band": Vector2(-60, -5),
+"wl": 100.0
+}
+}
+col_suelo = Color(0.65, 0.5, 0.25, 1)
+col_roca = Color(0.55, 0.25, 0.1, 1)
+col_mena_r = Color(0.55, 0.65, 0.75, 1)
+col_mena_g = Color(0.5, 0.35, 0.25, 1)
+col_halo = Color(1, 0.6, 0.2, 1)
+atmo_cenit = Color(0.65, 0.35, 0.12, 1)
+atmo_horizonte = Color(0.95, 0.65, 0.28, 1)
+piedra_bytes = 450
+montanas_amp = 55.0
+rugosidad_amp = 4.0
+
+[node name="Hielo" parent="." unique_id=118615502 instance=ExtResource("30_pcuerpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 3500)
+planeta_id = 2
+nombre = "Hielo"
+generador = ExtResource("33_hielo")
+ore_catalog = Array[ExtResource("2_tycn0")]([ExtResource("35_rcrio"), ExtResource("9_litio")])
+ore_config = {
+4: {
+"band": Vector2(-200, -60),
+"wl": 140.0
+},
+6: {
+"band": Vector2(-60, -5),
+"wl": 110.0
+}
+}
+col_suelo = Color(0.8, 0.9, 0.95, 1)
+col_roca = Color(0.5, 0.65, 0.8, 1)
+col_mena_g = Color(0.7, 0.8, 0.9, 1)
+col_mena_b = Color(0.6, 0.85, 0.95, 1)
+col_halo = Color(0.4, 0.85, 1, 1)
+atmo_cenit = Color(0.12, 0.2, 0.45, 1)
+atmo_horizonte = Color(0.65, 0.85, 0.98, 1)
+piedra_bytes = 600
+montanas_amp = 25.0
+rugosidad_amp = 2.0
+
+[node name="Player" parent="." unique_id=215983939 instance=ExtResource("3_53xjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 436.1538, 0)
+
+[node name="Capsula" parent="." unique_id=434588474 instance=ExtResource("14_cap")]
+
+[node name="BaseCore" type="Node" parent="." unique_id=1782538269 groups=["base_core"]]
+script = ExtResource("15_bcore")
+
+[node name="Catalogo" type="Node" parent="." unique_id=734052623 groups=["catalogo"]]
+script = ExtResource("16_cat")
+
+[node name="Fundicion" parent="." unique_id=130161968 instance=ExtResource("17_fun")]
+
+[node name="CamaraInvestigacion" parent="." unique_id=530944060 instance=ExtResource("18_cam")]
+
+[node name="Centrifugadora" parent="." unique_id=289865080 instance=ExtResource("40_cent")]
+distancia = 6.0
+angulo_deg = 90.0
+
+[node name="ImpresoraPequena" parent="." unique_id=1563327434 instance=ExtResource("41_imppeq")]
+distancia = 4.0
+angulo_deg = 180.0
+
+[node name="ImpresoraMediana" parent="." unique_id=763986150 instance=ExtResource("42_impmed")]
+distancia = 7.0
+angulo_deg = -60.0
+
+[node name="ImpresoraGrande" parent="." unique_id=330426571 instance=ExtResource("43_impgra")]
+distancia = 9.5
+angulo_deg = -135.0
+
+[node name="MenuFabricacion" parent="." unique_id=783798433 instance=ExtResource("19_menu")]
+recetas = Array[ExtResource("19_rdata")]([ExtResource("20_rteth"), ExtResource("21_rpan"), ExtResource("22_rtan"), ExtResource("23_rbat"), ExtResource("24_rrove"), ExtResource("36_rtanq"), ExtResource("37_rtraje"), ExtResource("38_rlanz")])
+recursos = Array[ExtResource("2_tycn0")]([ExtResource("7_cobre"), ExtResource("8_hierro"), ExtResource("9_litio"), ExtResource("34_rtit"), ExtResource("35_rcrio")])
+
+[node name="PickableItem" parent="." unique_id=1676686026 instance=ExtResource("4_q4kh0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.16671, 251.28046, 0)
+
+[node name="PickableItemheavy" parent="." unique_id=1856935133 instance=ExtResource("5_dqpiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.363828, 254.20346, 0)
+
+[node name="PickableItemsmall" parent="." unique_id=1260427802 instance=ExtResource("6_vwuly")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.353916, 298.24713, 0)
+
+[node name="GameState" type="Node" parent="." unique_id=1526535815]
+script = ExtResource("27_gstate")
+
+[node name="Shuttle" parent="." unique_id=586231777 instance=ExtResource("38_oqy1f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 383, 0)
